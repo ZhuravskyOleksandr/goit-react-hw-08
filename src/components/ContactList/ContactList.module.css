@@ -1,0 +1,9 @@
+.contactList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.contactListItem {
+  flex-basis: calc((100% - 12px * 3) / 4);
+}
