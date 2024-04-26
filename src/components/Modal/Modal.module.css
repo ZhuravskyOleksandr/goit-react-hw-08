@@ -1,0 +1,32 @@
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.7);
+  /* overflow-y: auto; */
+  z-index: 999;
+  transition: opacity 0.3s;
+}
+
+.modalContent {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 400px;
+  padding: 60px 20px;
+  background-color: #252728;
+  border-radius: 10px;
+  filter: drop-shadow(0 0 10px rgba(163, 0, 57, 0.7));
+  transition: transform 0.3s;
+}
+
+.blockScroll {
+  overflow: hidden;
+}

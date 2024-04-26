@@ -1,26 +1,37 @@
-import css from './ContactForm.module.css';
+import css from './EditForm.module.css';
 import clsx from 'clsx';
 import { useId } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import { useDispatch } from 'react-redux';
-import { addContact } from '../../redux/contacts/operations';
-import { ContactSchema, contactFormInitValues } from '../../constants';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectModalData } from '../../redux/modal/selectors';
+import { closeModal } from '../../redux/modal/slice';
+import { editContact } from '../../redux/contacts/operations';
+import { EditSchema } from '../../constants';
 
-export default function ContactForm() {
+export default function EditForm() {
   const nameFieldId = useId();
   const numberFieldId = useId();
   const dispatch = useDispatch();
+  const contact = useSelector(selectModalData);
 
-  function handleSubmit(values, actions) {
-    dispatch(addContact(values));
-    actions.resetForm();
+  function handleSubmit(values) {
+    dispatch(
+      editContact({
+        id: contact.id,
+        ...values,
+      })
+    );
+    dispatch(closeModal());
   }
 
   return (
     <Formik
-      initialValues={contactFormInitValues}
+      initialValues={{
+        name: contact.name,
+        number: contact.number,
+      }}
       onSubmit={handleSubmit}
-      validationSchema={ContactSchema}
+      validationSchema={EditSchema}
     >
       {formikValid => {
         return (
@@ -65,9 +76,20 @@ export default function ContactForm() {
               />
             </div>
 
-            <button className={css.formBtn} type="submit">
-              Add contact
-            </button>
+            <div>
+              <button className={css.formBtn} type="submit">
+                Save changes
+              </button>
+              <button
+                className={css.formBtn}
+                type="button"
+                onClick={() => {
+                  dispatch(closeModal());
+                }}
+              >
+                Cancel
+              </button>
+            </div>
           </Form>
         );
       }}

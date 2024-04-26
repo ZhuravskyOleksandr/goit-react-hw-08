@@ -1,6 +1,12 @@
-import { createSelector, createSlice } from '@reduxjs/toolkit';
-import { fetchContacts, addContact, deleteContact } from './contactsOps';
-import { selectNameFilter } from './filtersSlice';
+import { createSlice } from '@reduxjs/toolkit';
+import { contactsInitialState } from '../../constants';
+import {
+  fetchContacts,
+  addContact,
+  deleteContact,
+  editContact,
+} from './operations';
+// import { logout } from '../auth/operations';
 
 const handlePending = state => {
   state.loading = true;
@@ -14,11 +20,7 @@ const handleRejected = (state, action) => {
 
 const contactsSlice = createSlice({
   name: 'contacts',
-  initialState: {
-    items: [],
-    loading: false,
-    error: null,
-  },
+  initialState: contactsInitialState,
   extraReducers: builder => {
     builder
       .addCase(fetchContacts.pending, handlePending)
@@ -42,29 +44,20 @@ const contactsSlice = createSlice({
           contact => contact.id !== action.payload.id
         );
       })
-      .addCase(deleteContact.rejected, handleRejected);
+      .addCase(deleteContact.rejected, handleRejected)
+
+      .addCase(editContact.pending, handlePending)
+      .addCase(editContact.fulfilled, (state, action) => {
+        const contactIdx = state.items.findIndex(
+          contact => contact.id === action.payload.id
+        );
+        state.items.splice(contactIdx, 1, { ...action.payload });
+      })
+      .addCase(editContact.rejected, handleRejected);
+    // .addCase(logout.fulfilled, state => {
+    //   state.items = [];
+    // });
   },
 });
 
-const contactsReducer = contactsSlice.reducer;
-
-const selectContacts = state => state.contacts.items;
-const selectLoading = state => state.contacts.loading;
-const selectError = state => state.contacts.error;
-
-const selectFilteredContacts = createSelector(
-  [selectContacts, selectNameFilter],
-  (contacts, filter) => {
-    return contacts.filter(contact =>
-      contact.name.toLowerCase().includes(filter.toLocaleLowerCase())
-    );
-  }
-);
-
-export {
-  contactsReducer,
-  selectContacts,
-  selectLoading,
-  selectError,
-  selectFilteredContacts,
-};
+export const contactsReducer = contactsSlice.reducer;

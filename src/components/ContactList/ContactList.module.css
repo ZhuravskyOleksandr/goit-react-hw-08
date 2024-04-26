@@ -1,9 +1,17 @@
 .contactList {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
+  background-color: #af9974;
+  width: 500px;
+  max-height: 300px;
+  padding: 10px;
+  border: 1px solid #252728;
+  border-radius: 4px;
+  overflow: auto;
 }
 
 .contactListItem {
-  flex-basis: calc((100% - 12px * 3) / 4);
+  width: 100%;
+}
+
+.contactListItem:not(:last-child) {
+  margin-bottom: 12px;
 }

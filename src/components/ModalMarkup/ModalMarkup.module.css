@@ -1,0 +1,48 @@
+.popUp {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.deleteConfirmation {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.question {
+  font-size: 20px;
+  color: #e2e2e2;
+}
+
+.contactName {
+  font-size: 24px;
+  color: #a30039;
+}
+
+.answersWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.btn {
+  background-color: #af9974;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 10px;
+  transition: opacity 0.3s, transform 0.3s;
+}
+
+.btn:hover {
+  opacity: 0.8;
+}
+
+.btn:active {
+  transform: scale(0.95);
+}

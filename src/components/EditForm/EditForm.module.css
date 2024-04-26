@@ -8,8 +8,8 @@
   border-radius: 4px;
   padding: 10px;
   margin-bottom: 20px;
-  width: 500px;
-  background-color: #af9974;
+  width: 100%;
+  /* background-color: #af9974; */
 }
 
 .formLabel {
@@ -17,7 +17,7 @@
 }
 
 .formField {
-  width: 480px;
+  width: 400px;
   color: #e2e2e2;
   background-color: #7d7757;
   outline: transparent;
@@ -47,6 +47,10 @@
 
 .formBtn:active {
   background-color: #970035;
+}
+
+.formBtn:not(:last-child) {
+  margin-right: 10px;
 }
 
 .link {

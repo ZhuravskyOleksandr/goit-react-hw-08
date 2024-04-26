@@ -1,0 +1,29 @@
+.notFoundWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 90vw;
+  height: 90vh;
+  background-color: #af9974;
+  background-image: url(../../images/not-found.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+}
+
+.notFoundLink {
+  transform: translateY(-85px);
+  color: #e2e2e2;
+  background-color: #727272;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-weight: 500;
+  text-transform: uppercase;
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.notFoundLink:hover,
+.notFoundLink:focus {
+  background-color: #a30039;
+}

@@ -1,26 +1,30 @@
-import css from './ContactForm.module.css';
+import css from './RegistrationForm.module.css';
 import clsx from 'clsx';
 import { useId } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { useDispatch } from 'react-redux';
-import { addContact } from '../../redux/contacts/operations';
-import { ContactSchema, contactFormInitValues } from '../../constants';
+import { register } from '../../redux/auth/operations';
+import {
+  RegistrationSchema,
+  registerationFormInitValues,
+} from '../../constants';
 
-export default function ContactForm() {
+export default function RegistrationForm() {
   const nameFieldId = useId();
-  const numberFieldId = useId();
+  const emailFieldId = useId();
+  const passwordFieldId = useId();
   const dispatch = useDispatch();
 
   function handleSubmit(values, actions) {
-    dispatch(addContact(values));
+    dispatch(register(values));
     actions.resetForm();
   }
 
   return (
     <Formik
-      initialValues={contactFormInitValues}
+      initialValues={registerationFormInitValues}
       onSubmit={handleSubmit}
-      validationSchema={ContactSchema}
+      validationSchema={RegistrationSchema}
     >
       {formikValid => {
         return (
@@ -46,27 +50,47 @@ export default function ContactForm() {
             </div>
 
             <div>
-              <label className={css.formLabel} htmlFor={numberFieldId}>
-                Number
+              <label className={css.formLabel} htmlFor={emailFieldId}>
+                Email
               </label>
               <Field
                 className={clsx(css.formField, {
                   [css.formFieldWarning]:
-                    formikValid.touched.number && formikValid.errors.number,
+                    formikValid.touched.email && formikValid.errors.email,
                 })}
-                type="tel"
-                name="number"
-                id={numberFieldId}
+                type="email"
+                name="email"
+                id={emailFieldId}
               />
               <ErrorMessage
                 className={css.warning}
-                name="number"
+                name="email"
+                component="span"
+              />
+            </div>
+
+            <div>
+              <label className={css.formLabel} htmlFor={passwordFieldId}>
+                Password
+              </label>
+              <Field
+                className={clsx(css.formField, {
+                  [css.formFieldWarning]:
+                    formikValid.touched.password && formikValid.errors.password,
+                })}
+                type="password"
+                name="password"
+                id={passwordFieldId}
+              />
+              <ErrorMessage
+                className={css.warning}
+                name="password"
                 component="span"
               />
             </div>
 
             <button className={css.formBtn} type="submit">
-              Add contact
+              Sign Up
             </button>
           </Form>
         );

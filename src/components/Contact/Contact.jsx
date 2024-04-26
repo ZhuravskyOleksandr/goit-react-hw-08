@@ -1,10 +1,37 @@
 import css from './Contact.module.css';
 import { HiUser, HiPhone } from 'react-icons/hi';
 import { useDispatch } from 'react-redux';
-import { deleteContact } from '../../redux/contactsOps';
+import { openModal } from '../../redux/modal/slice';
+import { actions } from '../../constants';
 
 export default function Contact({ contact: { id, name, number } }) {
   const dispatch = useDispatch();
+
+  function handleEdit() {
+    dispatch(
+      openModal({
+        modalData: {
+          id,
+          name,
+          number,
+        },
+        actionType: actions.editContact,
+      })
+    );
+  }
+
+  function handleDelete() {
+    dispatch(
+      openModal({
+        modalData: {
+          id,
+          name,
+          number,
+        },
+        actionType: actions.deleteContact,
+      })
+    );
+  }
 
   return (
     <div className={css.contactListItemWrapper}>
@@ -16,13 +43,14 @@ export default function Contact({ contact: { id, name, number } }) {
           <HiPhone size={20} /> {number}
         </p>
       </div>
-      <button
-        className={css.deleteBtn}
-        type="button"
-        onClick={() => dispatch(deleteContact(id))}
-      >
-        Delete
-      </button>
+      <div>
+        <button className={css.contactBtn} type="button" onClick={handleEdit}>
+          Edit
+        </button>
+        <button className={css.contactBtn} type="button" onClick={handleDelete}>
+          Delete
+        </button>
+      </div>
     </div>
   );
 }

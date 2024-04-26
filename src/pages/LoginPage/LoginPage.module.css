@@ -1,0 +1,11 @@
+.tooltip {
+  text-align: center;
+}
+
+.link {
+  color: #252728;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
