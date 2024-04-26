@@ -53,10 +53,11 @@ const contactsSlice = createSlice({
         );
         state.items.splice(contactIdx, 1, { ...action.payload });
       })
-      .addCase(editContact.rejected, handleRejected);
-    // .addCase(logout.fulfilled, state => {
-    //   state.items = [];
-    // });
+      .addCase(editContact.rejected, handleRejected)
+
+      .addCase(logout.fulfilled, state => {
+        state.items = [];
+      });
   },
 });
 
