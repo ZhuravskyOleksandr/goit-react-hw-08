@@ -6,7 +6,7 @@ import {
   deleteContact,
   editContact,
 } from './operations';
-// import { logout } from '../auth/operations';
+import { logout } from '../auth/operations';
 
 const handlePending = state => {
   state.loading = true;
